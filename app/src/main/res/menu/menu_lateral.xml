@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/aboutNavApp_ID"
+              android:icon="@drawable/ic_info"
+            android:title="@string/info"/>
+
+        <item android:id="@+id/infoNav_ID"
+            android:icon="@drawable/ic_info"
+            android:title="@string/info"/>
+
+        <item android:id="@+id/donarNav_ID"
+            android:icon="@drawable/ic_donar"
+            android:title="@string/donar"/>
+
+        <item android:id="@+id/bugs_ID"
+            android:icon="@drawable/ic_bug"
+            android:title="@string/reports_bugs"/>
+    </group>
+
+    <item android:title="@string/desarrollador">
+        <menu>
+
+            <item android:id="@+id/contacto_ID"
+                android:icon="@drawable/ic_send"
+                android:title="@string/email"/>
+
+            <item android:id="@+id/prueba_ID"
+                android:icon="@drawable/zoom"
+                android:title="@string/prueba"/>
+
+        </menu>
+
+    </item>
+
+</menu>
