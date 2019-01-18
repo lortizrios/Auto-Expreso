@@ -38,15 +38,9 @@
         <activity
             android:name=".ZoomEnableActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainDrawerActivity"
-            android:label="@string/title_activity_main_drawer"
-            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name=".MenuLateral"
-            android:theme="@style/AppTheme.NoActionBar">
-
+        <activity android:name=".SlideMenuActivity"
+            android:theme="@style/AppTheme.SliderActivityTheme">
         </activity>
     </application>
 

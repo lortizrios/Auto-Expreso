@@ -31,5 +31,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-ads:15.0.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
     implementation 'com.getbase:floatingactionbutton:1.10.1'
-
+    implementation 'com.r0adkll:slidableactivity:2.0.6'
 }

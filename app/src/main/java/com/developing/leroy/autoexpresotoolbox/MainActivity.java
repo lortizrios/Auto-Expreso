@@ -16,6 +16,8 @@ import android.os.Vibrator;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,9 +29,13 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.ads.InterstitialAd;
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private com.getbase.floatingactionbutton.FloatingActionButton fABCerrar;
     private com.getbase.floatingactionbutton.FloatingActionButton fABReload;
     private com.getbase.floatingactionbutton.FloatingActionButton fABZoom;
-    private DrawerLayout drawerLayout;
+
     private Vibrator vibraTor;
     private MaterialProgressBar progressBar;
 
@@ -77,16 +83,13 @@ public class MainActivity extends AppCompatActivity {
         //Firebase Analitics
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        //Habilita el boton de back en menu superior
+        //Habilita el boton de back en menu superior------------------------------------------------
         toolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolBar);
 
         //Habilita el ActionBar en la app
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //Casteo de menu lateral
-
 
         //Admod banner
         bannerAd = (AdView) findViewById(R.id.adView_ID);
@@ -164,10 +167,10 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
 
         webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webView.getSettings().setAppCacheEnabled(true);
+        //webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        //webView.getSettings().setAppCacheEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webSettings.setDomStorageEnabled(true);
+        //webSettings.setDomStorageEnabled(true);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webSettings.setUseWideViewPort(true);
         webSettings.setSaveFormData(true);
@@ -177,13 +180,14 @@ public class MainActivity extends AppCompatActivity {
         //Disable controls buttons on web view
         //webview.getSettings().setDisplayZoomControls(false);
         webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
-        webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
 
         //Material Progress Bar
         progressBar.setVisibility(View.GONE);
         webView.setWebViewClient(new WebViewClientDemo());
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://www.autoexpreso.com/");
+
 
         //Define color del progressbar
         ((ProgressBar)findViewById(R.id.materialProgressBar_ID))
@@ -213,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
             case R.id.rate:
                 diaLog = rateDialog().show();
 
@@ -224,6 +229,14 @@ public class MainActivity extends AppCompatActivity {
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_TEXT, "My new app http://www.----.com");
                     startActivity(Intent.createChooser(intent, "Compartir"));
+
+                break;
+
+            //Slide menu
+            case R.id.slidemenu:
+
+                Intent menuIntent = new Intent(MainActivity.this, SlideMenuActivity.class);
+                startActivity(menuIntent);
 
                 break;
 
@@ -380,12 +393,7 @@ public class MainActivity extends AppCompatActivity {
               public void onClick(View v) {
 
                   vibraTor.vibrate(20);
-                  Toast.makeText(MainActivity.this, "Menu Lateral", Toast.LENGTH_SHORT).show();
-
-                  Intent intent = new Intent(MainActivity.this, MenuLateral.class);
-                  startActivity(intent);
-
-
+                  Toast.makeText(MainActivity.this, "Reload = False", Toast.LENGTH_SHORT).show();
                   timeSecondsCollapse();
 
               }
